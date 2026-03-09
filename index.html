@@ -18,7 +18,7 @@
 <body class="bg-slate-950 text-white select-none font-sans overflow-hidden flex flex-col h-screen w-full">
 
     <!-- 상단 컨트롤 바 -->
-    <div class="h-14 sm:h-16 flex items-center justify-between px-2 sm:px-6 bg-slate-900 border-b border-slate-800 shrink-0 z-20">
+    <div class="h-12 sm:h-14 lg:h-16 flex items-center justify-between px-2 sm:px-6 bg-slate-900 border-b border-slate-800 shrink-0 z-20">
         <div class="flex items-center gap-1 sm:gap-2">
             <!-- 자리 바꾸기 -->
             <button onclick="switchSides()" class="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 bg-slate-800 hover:bg-slate-700 rounded-lg font-bold text-slate-300 transition-colors text-sm sm:text-base">
@@ -53,24 +53,24 @@
     <div class="flex flex-1 w-full relative flex-col landscape:flex-row">
         <!-- 상단/좌측 (홈) -->
         <div id="leftZone" class="flex-1 flex flex-col relative border-b landscape:border-b-0 landscape:border-r border-slate-900 transition-colors-500">
-            <!-- 서브권 바 (모바일에서 높이 최적화) -->
-            <div id="leftServeBar" onclick="setFirstServer('left')" class="w-full py-1.5 sm:py-2 landscape:py-3 shrink-0 flex items-center justify-center cursor-pointer transition-all duration-500 font-bold text-sm sm:text-xl landscape:text-2xl tracking-widest z-20">
+            <!-- 서브권 바 -->
+            <div id="leftServeBar" onclick="setFirstServer('left')" class="w-full h-[12%] lg:h-[15%] shrink-0 min-h-[30px] sm:min-h-[40px] flex items-center justify-center cursor-pointer transition-all duration-500 font-bold text-xs sm:text-xl landscape:text-lg lg:landscape:text-3xl tracking-widest z-20">
                 서브
             </div>
 
-            <div class="h-auto py-2 sm:py-4 min-h-[70px] sm:min-h-[110px] landscape:min-h-[140px] flex flex-col items-center justify-center relative z-10 bg-gradient-to-b from-slate-900/40 to-transparent">
-                <!-- 세트 점수 뱃지 (모바일 화면에 맞춰 반응형 스케일링) -->
-                <div id="leftBadge" class="flex items-center gap-3 sm:gap-6 px-4 sm:px-8 py-2 sm:py-4 landscape:py-6 rounded-full mb-1 sm:mb-2 backdrop-blur-sm transition-colors-500 shadow-lg">
-                    <button onclick="adjustSets('left', -1)" class="p-1 sm:p-3 hover:bg-white/20 rounded-full transition-colors"><svg class="w-6 h-6 sm:w-10 sm:h-10 landscape:w-12 landscape:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14"/></svg></button>
-                    <span id="leftSetsDisplay" class="text-3xl sm:text-6xl md:text-7xl landscape:text-[6rem] font-extrabold px-3 sm:px-6 whitespace-nowrap">세트 0</span>
-                    <button onclick="adjustSets('left', 1)" class="p-1 sm:p-3 hover:bg-white/20 rounded-full transition-colors"><svg class="w-6 h-6 sm:w-10 sm:h-10 landscape:w-12 landscape:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14"/><path d="M12 5v14"/></svg></button>
+            <div class="h-auto py-2 sm:py-4 min-h-[60px] sm:min-h-[110px] landscape:min-h-[70px] lg:landscape:min-h-[140px] flex flex-col items-center justify-center relative z-10 bg-gradient-to-b from-slate-900/40 to-transparent">
+                <!-- 세트 점수 뱃지 -->
+                <div id="leftBadge" class="flex items-center gap-2 sm:gap-6 px-3 sm:px-8 py-1.5 sm:py-4 landscape:py-2 lg:landscape:py-6 rounded-full mb-1 sm:mb-2 backdrop-blur-sm transition-colors-500 shadow-lg">
+                    <button onclick="adjustSets('left', -1)" class="p-1 sm:p-3 hover:bg-white/20 rounded-full transition-colors"><svg class="w-5 h-5 sm:w-10 sm:h-10 landscape:w-7 landscape:h-7 lg:landscape:w-12 lg:landscape:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14"/></svg></button>
+                    <span id="leftSetsDisplay" class="text-2xl sm:text-6xl md:text-7xl landscape:text-3xl lg:landscape:text-[6rem] font-extrabold px-3 sm:px-6 whitespace-nowrap">세트 0</span>
+                    <button onclick="adjustSets('left', 1)" class="p-1 sm:p-3 hover:bg-white/20 rounded-full transition-colors"><svg class="w-5 h-5 sm:w-10 sm:h-10 landscape:w-7 landscape:h-7 lg:landscape:w-12 lg:landscape:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14"/><path d="M12 5v14"/></svg></button>
                 </div>
             </div>
-            <!-- 메인 점수 (세로/가로 화면 비율에 맞춰 동적 조절) -->
+            <!-- 메인 점수 -->
             <button onclick="addScore('left')" id="leftScoreBtn" class="flex-1 w-full flex items-center justify-center focus:outline-none transition-colors-500 group relative z-0">
-                <span id="leftScoreDisplay" class="text-[20dvh] sm:text-[28dvh] landscape:text-[50dvh] leading-none font-bold tabular-nums tracking-tighter drop-shadow-2xl group-active:scale-95 transition-transform">0</span>
+                <span id="leftScoreDisplay" class="text-[25dvh] sm:text-[30dvh] landscape:text-[45dvh] lg:landscape:text-[55dvh] leading-none font-bold tabular-nums tracking-tighter drop-shadow-2xl group-active:scale-95 transition-transform">0</span>
             </button>
-            <div class="absolute bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-10">
+            <div class="absolute bottom-2 sm:bottom-6 landscape:bottom-2 lg:landscape:bottom-6 left-1/2 -translate-x-1/2 z-10">
                 <button onclick="minusScore('left')" class="px-3 py-1.5 sm:px-6 sm:py-3 bg-black/40 hover:bg-black/60 backdrop-blur-sm rounded-full text-white/90 font-bold text-xs sm:text-lg flex items-center gap-1 sm:gap-2 transition-colors">
                     <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg> 1점 취소
                 </button>
@@ -80,23 +80,23 @@
         <!-- 하단/우측 (원정) -->
         <div id="rightZone" class="flex-1 flex flex-col relative transition-colors-500">
             <!-- 서브권 바 -->
-            <div id="rightServeBar" onclick="setFirstServer('right')" class="w-full py-1.5 sm:py-2 landscape:py-3 shrink-0 flex items-center justify-center cursor-pointer transition-all duration-500 font-bold text-sm sm:text-xl landscape:text-2xl tracking-widest z-20">
+            <div id="rightServeBar" onclick="setFirstServer('right')" class="w-full h-[12%] lg:h-[15%] shrink-0 min-h-[30px] sm:min-h-[40px] flex items-center justify-center cursor-pointer transition-all duration-500 font-bold text-xs sm:text-xl landscape:text-lg lg:landscape:text-3xl tracking-widest z-20">
                 서브
             </div>
 
-            <div class="h-auto py-2 sm:py-4 min-h-[70px] sm:min-h-[110px] landscape:min-h-[140px] flex flex-col items-center justify-center relative z-10 bg-gradient-to-b from-slate-900/40 to-transparent">
+            <div class="h-auto py-2 sm:py-4 min-h-[60px] sm:min-h-[110px] landscape:min-h-[70px] lg:landscape:min-h-[140px] flex flex-col items-center justify-center relative z-10 bg-gradient-to-b from-slate-900/40 to-transparent">
                 <!-- 세트 점수 뱃지 -->
-                <div id="rightBadge" class="flex items-center gap-3 sm:gap-6 px-4 sm:px-8 py-2 sm:py-4 landscape:py-6 rounded-full mb-1 sm:mb-2 backdrop-blur-sm transition-colors-500 shadow-lg">
-                    <button onclick="adjustSets('right', -1)" class="p-1 sm:p-3 hover:bg-white/20 rounded-full transition-colors"><svg class="w-6 h-6 sm:w-10 sm:h-10 landscape:w-12 landscape:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14"/></svg></button>
-                    <span id="rightSetsDisplay" class="text-3xl sm:text-6xl md:text-7xl landscape:text-[6rem] font-extrabold px-3 sm:px-6 whitespace-nowrap">세트 0</span>
-                    <button onclick="adjustSets('right', 1)" class="p-1 sm:p-3 hover:bg-white/20 rounded-full transition-colors"><svg class="w-6 h-6 sm:w-10 sm:h-10 landscape:w-12 landscape:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14"/><path d="M12 5v14"/></svg></button>
+                <div id="rightBadge" class="flex items-center gap-2 sm:gap-6 px-3 sm:px-8 py-1.5 sm:py-4 landscape:py-2 lg:landscape:py-6 rounded-full mb-1 sm:mb-2 backdrop-blur-sm transition-colors-500 shadow-lg">
+                    <button onclick="adjustSets('right', -1)" class="p-1 sm:p-3 hover:bg-white/20 rounded-full transition-colors"><svg class="w-5 h-5 sm:w-10 sm:h-10 landscape:w-7 landscape:h-7 lg:landscape:w-12 lg:landscape:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14"/></svg></button>
+                    <span id="rightSetsDisplay" class="text-2xl sm:text-6xl md:text-7xl landscape:text-3xl lg:landscape:text-[6rem] font-extrabold px-3 sm:px-6 whitespace-nowrap">세트 0</span>
+                    <button onclick="adjustSets('right', 1)" class="p-1 sm:p-3 hover:bg-white/20 rounded-full transition-colors"><svg class="w-5 h-5 sm:w-10 sm:h-10 landscape:w-7 landscape:h-7 lg:landscape:w-12 lg:landscape:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14"/><path d="M12 5v14"/></svg></button>
                 </div>
             </div>
             <!-- 메인 점수 -->
             <button onclick="addScore('right')" id="rightScoreBtn" class="flex-1 w-full flex items-center justify-center focus:outline-none transition-colors-500 group relative z-0">
-                <span id="rightScoreDisplay" class="text-[20dvh] sm:text-[28dvh] landscape:text-[50dvh] leading-none font-bold tabular-nums tracking-tighter drop-shadow-2xl group-active:scale-95 transition-transform">0</span>
+                <span id="rightScoreDisplay" class="text-[25dvh] sm:text-[30dvh] landscape:text-[45dvh] lg:landscape:text-[55dvh] leading-none font-bold tabular-nums tracking-tighter drop-shadow-2xl group-active:scale-95 transition-transform">0</span>
             </button>
-            <div class="absolute bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-10">
+            <div class="absolute bottom-2 sm:bottom-6 landscape:bottom-2 lg:landscape:bottom-6 left-1/2 -translate-x-1/2 z-10">
                 <button onclick="minusScore('right')" class="px-3 py-1.5 sm:px-6 sm:py-3 bg-black/40 hover:bg-black/60 backdrop-blur-sm rounded-full text-white/90 font-bold text-xs sm:text-lg flex items-center gap-1 sm:gap-2 transition-colors">
                     <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg> 1점 취소
                 </button>
@@ -152,8 +152,8 @@
             blue: { zone: 'bg-blue-600', badge: 'bg-blue-900/40', btn: 'active:bg-blue-700' }
         };
 
-        // 서브권 바 공통 클래스 분리 (반응형 대응)
-        const baseBarClass = "w-full py-1.5 sm:py-2 landscape:py-3 shrink-0 flex items-center justify-center cursor-pointer transition-all duration-500 font-bold text-sm sm:text-xl landscape:text-2xl tracking-widest z-20";
+        // 서브권 바 공통 클래스 분리 (모바일/PC 반응형 대응)
+        const baseBarClass = "w-full h-[12%] lg:h-[15%] shrink-0 min-h-[30px] sm:min-h-[40px] flex items-center justify-center cursor-pointer transition-all duration-500 font-bold text-xs sm:text-xl landscape:text-lg lg:landscape:text-3xl tracking-widest z-20";
 
         // 게임 모드 설정 (11점 / 15점 전환)
         function setGameMode(mode) {
@@ -230,7 +230,7 @@
         function applyTheme(side) {
             const c = themes[state[side].color];
             document.getElementById(`${side}Zone`).className = `flex-1 flex flex-col relative border-b landscape:border-b-0 landscape:border-r border-slate-900 transition-colors-500 ${c.zone}`;
-            document.getElementById(`${side}Badge`).className = `flex items-center gap-3 sm:gap-6 px-4 sm:px-8 py-2 sm:py-4 landscape:py-6 rounded-full mb-1 sm:mb-2 backdrop-blur-sm transition-colors-500 shadow-lg ${c.badge}`;
+            document.getElementById(`${side}Badge`).className = `flex items-center gap-2 sm:gap-6 px-3 sm:px-8 py-1.5 sm:py-4 landscape:py-2 lg:landscape:py-6 rounded-full mb-1 sm:mb-2 backdrop-blur-sm transition-colors-500 shadow-lg ${c.badge}`;
             document.getElementById(`${side}ScoreBtn`).className = `flex-1 w-full flex items-center justify-center focus:outline-none transition-colors-500 group relative z-0 ${c.btn}`;
         }
 
