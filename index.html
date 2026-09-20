@@ -114,6 +114,24 @@
         </div>
     </div>
 
+    <!-- 경기 시작 서브 선택 -->
+    <dialog id="firstServeModal" aria-labelledby="firstServeTitle" aria-describedby="firstServeDescription" class="bg-slate-900 text-white p-6 sm:p-8 rounded-3xl w-[calc(100%-2rem)] max-w-sm border border-slate-700 shadow-2xl backdrop:bg-black/80 backdrop:backdrop-blur-sm">
+        <h2 id="firstServeTitle" class="text-xl sm:text-2xl font-bold text-center mb-3">첫 서브 선택</h2>
+        <p id="firstServeDescription" class="text-slate-400 text-sm sm:text-base text-center mb-6">먼저 서브할 진영을 선택하면 경기가 시작됩니다.</p>
+        <div class="flex flex-col landscape:flex-row gap-3">
+            <button type="button" onclick="startGame('left')" class="flex-1 py-4 px-3 bg-red-600 hover:bg-red-500 rounded-xl font-bold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-400">
+                <span class="block text-lg">RED 진영</span>
+                <span class="text-sm font-normal landscape:hidden">위쪽에서 시작</span>
+                <span class="text-sm font-normal hidden landscape:inline">왼쪽에서 시작</span>
+            </button>
+            <button type="button" onclick="startGame('right')" class="flex-1 py-4 px-3 bg-blue-600 hover:bg-blue-500 rounded-xl font-bold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-400">
+                <span class="block text-lg">BLUE 진영</span>
+                <span class="text-sm font-normal landscape:hidden">아래쪽에서 시작</span>
+                <span class="text-sm font-normal hidden landscape:inline">오른쪽에서 시작</span>
+            </button>
+        </div>
+    </dialog>
+
     <!-- 초기화 모달 -->
     <div id="resetModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
         <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl max-w-sm w-full text-center border border-slate-700 shadow-2xl">
@@ -193,6 +211,12 @@
         function adjustSets(side, amount) { state[side].sets = Math.max(0, state[side].sets + amount); render(); }
         function setFirstServer(side) { state.firstServer = side; calculateServer(); render(); }
 
+        function startGame(side) {
+            setFirstServer(side);
+            document.getElementById('firstServeModal').close();
+            document.getElementById(side + 'ScoreBtn').focus();
+        }
+
         function switchSides() {
             const temp = { ...state.left };
             state.left = { ...state.right };
@@ -225,6 +249,7 @@
             calculateServer();
             render();
             checkWin();
+            document.getElementById('firstServeModal').showModal();
         }
 
         function applyTheme(side) {
@@ -283,7 +308,13 @@
             }
         }
         
+        // 선택 전에는 점수판 조작과 Escape 키로 선택 창을 닫는 것을 막습니다.
+        document.getElementById('firstServeModal').addEventListener('cancel', event => event.preventDefault());
+        document.getElementById('firstServeModal').addEventListener('keydown', event => {
+            if (event.key === 'Escape') event.preventDefault();
+        });
         render();
+        document.getElementById('firstServeModal').showModal();
     </script>
 </body>
 </html>
