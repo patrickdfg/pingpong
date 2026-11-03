@@ -32,6 +32,9 @@
                 <span class="hidden md:inline">전체화면</span>
             </button>
 
+            <!-- 대진표로 이동 (돌아왔을 때 이어가도록 점수를 저장) -->
+            <a href="https://patrickdfg.github.io/pingpong2/" onclick="sessionStorage.setItem('pingpong-score', JSON.stringify(state))" class="flex items-center px-2 sm:px-3 py-1.5 sm:py-2 bg-slate-800 hover:bg-slate-700 rounded-lg font-bold text-slate-300 transition-colors text-sm sm:text-base whitespace-nowrap">대진표</a>
+
             <!-- 11점 / 15점 게임 모드 토글 스위치 -->
             <div class="flex bg-slate-800 rounded-lg p-1 ml-1 sm:ml-2 shrink-0 border border-slate-700">
                 <button id="btn-11" onclick="setGameMode(11)" class="px-2 py-1 sm:px-4 text-xs sm:text-base font-bold rounded-md transition-colors bg-slate-600 text-white shadow-sm">11점</button>
@@ -313,8 +316,17 @@
         document.getElementById('firstServeModal').addEventListener('keydown', event => {
             if (event.key === 'Escape') event.preventDefault();
         });
-        render();
-        document.getElementById('firstServeModal').showModal();
+        // 대진표에 다녀온 경우 저장해 둔 점수로 이어갑니다.
+        const savedScore = sessionStorage.getItem('pingpong-score');
+        if (savedScore) {
+            sessionStorage.removeItem('pingpong-score');
+            state = JSON.parse(savedScore);
+            render();
+            checkWin();
+        } else {
+            render();
+            document.getElementById('firstServeModal').showModal();
+        }
     </script>
 </body>
 </html>
