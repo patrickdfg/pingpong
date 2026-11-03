@@ -8,6 +8,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="mobile-web-app-capable" content="yes">
     <title>탁구 점수판</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta name="theme-color" content="#0c3d53">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -34,6 +37,9 @@
 
             <!-- 대진표로 이동 (돌아왔을 때 이어가도록 점수를 저장) -->
             <a href="https://patrickdfg.github.io/pingpong2/" onclick="sessionStorage.setItem('pingpong-score', JSON.stringify(state))" class="flex items-center px-2 sm:px-3 py-1.5 sm:py-2 bg-slate-800 hover:bg-slate-700 rounded-lg font-bold text-slate-300 transition-colors text-sm sm:text-base whitespace-nowrap">대진표</a>
+
+            <!-- 앱 설치 (설치할 수 있을 때만 보임) -->
+            <button id="install" class="hidden px-2 sm:px-3 py-1.5 sm:py-2 bg-slate-800 hover:bg-slate-700 rounded-lg font-bold text-slate-300 transition-colors text-sm sm:text-base whitespace-nowrap">앱 설치</button>
 
             <!-- 11점 / 15점 게임 모드 토글 스위치 -->
             <div class="flex bg-slate-800 rounded-lg p-1 ml-1 sm:ml-2 shrink-0 border border-slate-700">
@@ -316,6 +322,23 @@
         document.getElementById('firstServeModal').addEventListener('keydown', event => {
             if (event.key === 'Escape') event.preventDefault();
         });
+        // 앱 설치와 오프라인 사용 준비: 어느 쪽에서 열어도 두 페이지를 모두 저장한다
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/pingpong/sw.js', { scope: '/pingpong/' });
+          navigator.serviceWorker.register('/pingpong2/sw.js', { scope: '/pingpong2/' });
+        }
+        let installEvent = null;
+        const installBtn = document.getElementById('install');
+        addEventListener('beforeinstallprompt', e => {
+          e.preventDefault();
+          installEvent = e;
+          installBtn.classList.remove('hidden');
+        });
+        installBtn.addEventListener('click', () => {
+          installEvent.prompt();
+          installBtn.classList.add('hidden');
+        });
+
         // 대진표에 다녀온 경우 저장해 둔 점수로 이어갑니다.
         const savedScore = sessionStorage.getItem('pingpong-score');
         if (savedScore) {
