@@ -63,7 +63,7 @@
         <!-- 상단/좌측 (홈) -->
         <div id="leftZone" class="flex-1 flex flex-col relative border-b landscape:border-b-0 landscape:border-r border-slate-900 transition-colors-500">
             <!-- 서브권 바 -->
-            <div id="leftServeBar" onclick="setFirstServer('left')" class="w-full h-[12%] lg:h-[15%] shrink-0 min-h-[30px] sm:min-h-[40px] flex items-center justify-center cursor-pointer transition-all duration-500 font-bold text-xs sm:text-xl landscape:text-lg lg:landscape:text-3xl tracking-widest z-20">
+            <div id="leftServeBar" onclick="toggleServer()" class="w-full h-[12%] lg:h-[15%] shrink-0 min-h-[30px] sm:min-h-[40px] flex items-center justify-center cursor-pointer transition-all duration-500 font-bold text-xs sm:text-xl landscape:text-lg lg:landscape:text-3xl tracking-widest z-20">
                 서브
             </div>
 
@@ -89,7 +89,7 @@
         <!-- 하단/우측 (원정) -->
         <div id="rightZone" class="flex-1 flex flex-col relative transition-colors-500">
             <!-- 서브권 바 -->
-            <div id="rightServeBar" onclick="setFirstServer('right')" class="w-full h-[12%] lg:h-[15%] shrink-0 min-h-[30px] sm:min-h-[40px] flex items-center justify-center cursor-pointer transition-all duration-500 font-bold text-xs sm:text-xl landscape:text-lg lg:landscape:text-3xl tracking-widest z-20">
+            <div id="rightServeBar" onclick="toggleServer()" class="w-full h-[12%] lg:h-[15%] shrink-0 min-h-[30px] sm:min-h-[40px] flex items-center justify-center cursor-pointer transition-all duration-500 font-bold text-xs sm:text-xl landscape:text-lg lg:landscape:text-3xl tracking-widest z-20">
                 서브
             </div>
 
@@ -219,6 +219,10 @@
         function minusScore(side) { if (state[side].score > 0) { state[side].score--; calculateServer(); render(); checkWin(); } }
         function adjustSets(side, amount) { state[side].sets = Math.max(0, state[side].sets + amount); render(); }
         function setFirstServer(side) { state.firstServer = side; calculateServer(); render(); }
+
+        function toggleServer() {
+            setFirstServer(state.firstServer === 'left' ? 'right' : 'left');
+        }
 
         function startGame(side) {
             setFirstServer(side);
