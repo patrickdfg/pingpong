@@ -322,6 +322,16 @@
         document.getElementById('firstServeModal').addEventListener('keydown', event => {
             if (event.key === 'Escape') event.preventDefault();
         });
+        document.addEventListener('keydown', event => {
+            if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+            if (event.defaultPrevented || event.isComposing || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+            if (document.getElementById('firstServeModal').open) return;
+            if (['winModal', 'resetModal', 'fsErrorModal'].some(id => !document.getElementById(id).classList.contains('hidden'))) return;
+
+            event.preventDefault();
+            if (!event.repeat) addScore(event.key === 'ArrowLeft' ? 'left' : 'right');
+        });
+
         // 앱 설치와 오프라인 사용 준비: 어느 쪽에서 열어도 두 페이지를 모두 저장한다
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.register('/pingpong/sw.js', { scope: '/pingpong/' });
